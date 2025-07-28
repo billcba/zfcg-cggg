@@ -1,3 +1,5 @@
+import tkinter as tk
+from tkinter import messagebox
 import sys
 import os
 
@@ -159,7 +161,12 @@ def process_and_save_data(records):
     print(df.head())
     return True
 
+root = tk.Tk()
+root.withdraw()  # 不显示主窗口
 
+response = messagebox.askyesno("提示", "是否下载最近30天江西政府采购招标公告医疗类？")
+if not response:
+    sys.exit(0)
 if __name__ == "__main__":
     print("=== 江西省政府采购数据采集 ===")
     print("Start:", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
@@ -172,5 +179,4 @@ if __name__ == "__main__":
     process_and_save_data(data)
 
     print("End:", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-    print("\n程序执行完成，结果已写入 log.txt，如有错误信息请查看该文件。")
-input("按下回车键退出程序...")
+messagebox.showinfo("完成", "下载完成！点击确定退出。")
