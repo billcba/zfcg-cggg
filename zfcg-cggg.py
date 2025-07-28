@@ -164,13 +164,13 @@ def process_and_save_data(records):
 root = tk.Tk()
 root.withdraw()  # 不显示主窗口
 
-response = messagebox.askyesno("提示", "是否下载最近30天江西政府采购招标公告医疗类？")
-if not response:
-    sys.exit(0)
+
 if __name__ == "__main__":
     print("=== 江西省政府采购数据采集 ===")
     print("Start:", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-
+response = messagebox.askyesno("提示", "是否下载最近30天江西政府采购招标公告医疗类？")
+if not response:
+    sys.exit(0)
     # 设置日期范围：近30天
     end_date = datetime.today().strftime("%Y-%m-%d")
     start_date = (datetime.today() - timedelta(days=30)).strftime("%Y-%m-%d")
