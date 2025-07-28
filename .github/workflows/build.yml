@@ -19,7 +19,7 @@ jobs:
       - name: Build exe
         run: pyinstaller --onefile zfcg-cggg.py
       - name: Upload exe
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: zfcg-cggg-exe
           path: dist/zfcg-cggg.exe
