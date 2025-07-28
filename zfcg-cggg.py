@@ -1,10 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-import sys
-import os
 
-sys.stdout = open("log.txt", "w", encoding="utf-8")
-sys.stderr = sys.stdout
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
@@ -164,13 +160,22 @@ def process_and_save_data(records):
 root = tk.Tk()
 root.withdraw()  # 不显示主窗口
 
+root = tk.Tk()
+root.withdraw()
 
+# 提示是否执行
+if not messagebox.askyesno("提示", "是否下载最近30天江西政府采购招标公告医疗类？"):
+    sys.exit(0)
+
+# 显示“下载中”弹窗（非阻塞）
+progress = tk.Toplevel()
+progress.title("正在下载")
+label = tk.Label(progress, text="正在下载中，请稍等……", padx=20, pady=20)
+label.pack()
+progress.update()
 if __name__ == "__main__":
     print("=== 江西省政府采购数据采集 ===")
     print("Start:", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-response = messagebox.askyesno("提示", "是否下载最近30天江西政府采购招标公告医疗类？")
-if not response:
-    sys.exit(0)
     # 设置日期范围：近30天
     end_date = datetime.today().strftime("%Y-%m-%d")
     start_date = (datetime.today() - timedelta(days=30)).strftime("%Y-%m-%d")
@@ -179,4 +184,5 @@ if not response:
     process_and_save_data(data)
 
     print("End:", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-messagebox.showinfo("完成", "下载完成！点击确定退出。")
+progress.destroy()
+messagebox.showinfo("完成", "下载完成！点击确定退出程序。")
