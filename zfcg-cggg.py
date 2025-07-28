@@ -1,3 +1,8 @@
+import sys
+import os
+
+sys.stdout = open("log.txt", "w", encoding="utf-8")
+sys.stderr = sys.stdout
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
@@ -167,3 +172,5 @@ if __name__ == "__main__":
     process_and_save_data(data)
 
     print("End:", datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    print("\n程序执行完成，结果已写入 log.txt，如有错误信息请查看该文件。")
+input("按下回车键退出程序...")
