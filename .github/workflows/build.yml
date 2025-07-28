@@ -14,8 +14,9 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      - name: Install pyinstaller
-        run: pip install pyinstaller
+      - name: Install dependencies
+        run: |
+           pip install pyinstaller requests pandas openpyxl
       - name: Build exe
         run: pyinstaller --onefile zfcg-cggg.py
       - name: Upload exe
